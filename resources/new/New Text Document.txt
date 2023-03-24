@@ -1,0 +1,62 @@
+library:
+
+FEC Central Library
+HVW3+RWV, Dr Kaji Motaher Hossain Rd, Faridpur 7800
+
+District Public Library
+
+FPI Central Library
+
+Sufi Motahar Pathagar
+
+Sher-E-Bangla Library
+
+Muslim Mission Library
+
+Moezudden Public Library
+
+Islamia Book Depot
+
+Sayeem library
+
+Tofael Book House
+
+Janani library
+
+
+
+books:
+
+
+
+Programming in ANSI C by Balagurusamy
+
+
+Algorithms, 4th Edition by Robert Sedgewick and Kevin Wayne
+
+
+
+JAVA THE COMPLETE REFERENCE by Herbert Schildt
+
+
+
+Database Management Systems by  Ramon Mata-Toledo 
+
+
+
+
+Introduction to Computer Information Systems by Geoffrey Steinberg
+
+
+
+Operating System PDF Online 2020 by Rohit Khurana
+
+
+
+Object Oriented Programming with C++ Balagurusamy | 
+
+
+ Computer Architecture by Divakar Viswanath
+
+
+Numerical Analysis By G. Shanker Rao
