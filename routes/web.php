@@ -28,16 +28,31 @@ Route::get('/', function () {
 });
 
 Route::get('/book', function () {
-    $books = Book::with("author")->paginate(10);
+    $books = Book::with("author")->when(request('q'), function ($query) {
+        return $query->where("name", "like", '%' . request('q') . "%");
+    })->paginate(10);
     //dd($books);
     return view('user.book',compact("books"));
-});
+})->name('book');
 
 Route::get('/detail/{id}', function ($id) {
-    $book = Book::with(["author","category",'libraries'])->find($id);
-    // $library = Library::with('name');
-    // dd($books);
-    return view('user.detail',compact("book"));
+    $book = Book::with(["author", "category"])->find($id);
+    $libraries = $book->libraries()->get()->toArray();
+    $user = auth()->user();
+
+    usort($libraries, function ($a, $b) use ($user) {
+        // dd($a['latitude']);
+        if (!isset($user)) return 0;
+        $disA = sqrt(pow($a['longitude'] - $user['longitude'], 2) + pow($a['latitude'] - $user['latitude'], 2));
+        $disB = sqrt(pow($b['longitude'] - $user['longitude'], 2) + pow($b['latitude'] - $user['latitude'], 2));
+
+        if ($disA == $disB) return 0;
+        else if ($disA < $disB) return -1;
+        else if ($disA > $disB) return 1;
+    });
+
+    // dd($libraries);
+    return view('user.detail', compact("book", "libraries"));
 })->name("detail");
 // Route::view('/detail', 'user.detail');
 Route::view('/about', 'user.about');

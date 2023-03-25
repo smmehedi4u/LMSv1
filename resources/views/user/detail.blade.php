@@ -18,8 +18,8 @@
                     <div class="mt-n1">
                         <h4>Library Name</h4>
 
-            @foreach($book->libraries()->get() as $lib)
-                        <p>{{$lib->name}}</p>
+            @foreach($libraries as $lib)
+                        <a href="http://maps.google.com/maps?&z=15&mrt=yp&t=k&q={{$lib['longitude']}}+{{$lib['latitude']}}"><p>{{$lib['name']}}</p></a>
 
             @endforeach
                     </div>

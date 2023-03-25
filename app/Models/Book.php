@@ -20,7 +20,7 @@ class Book extends Model
 
     public function libraries()
     {
-        return $this->belongsToMany(Library::class,"booklibraries");
+        return $this->belongsToMany(Library::class, "book_libraries");
     }
 
     public function author()

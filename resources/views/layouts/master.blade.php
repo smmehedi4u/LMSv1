@@ -29,7 +29,7 @@
     <!-- Navbar Start -->
     <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg navbar-light py-3 py-lg-0 px-lg-3" style=" width: 100%; height: 60px; margin: 0px; background-color: rgb(197, 224, 247);">
-            <a href="index.html" class="navbar-brand ml-lg-3">
+            <a href="/" class="navbar-brand ml-lg-3">
             <img src="{{asset('images/logo.png')}}" style=" width: 100px; height: 50px; margin: 0px; border: 1px solid rgb(154, 187, 184); border-radius: 10px; " />
             </a>
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -41,13 +41,12 @@
                     <a href="book" class="nav-item nav-link">Books</a>
                     <a href="about" class="nav-item nav-link">About</a>
                 </div>
-
-
-                <input type="text" class="form-control border-light" style="width: 250px; border: 1px solid rgb(154, 187, 184); border-radius: 10px; " placeholder="Keyword">
-                <div class="input-group-append" style="margin-right: 50px; border: 1px solid rgb(154, 187, 184); border-radius: 10px;">
-                    <button class="btn btn-secondary px-2 px-lg-3" style="border: 1px solid rgb(154, 187, 184); border-radius: 10px;">Search</button>
-                </div>
-
+                <form style="display: flex" method="get" action="{{route('book')}}">
+                    <input type="text" value="{{old('q')}}" name="q" class="form-control border-light" style="width: 250px; border: 1px solid rgb(154, 187, 184); border-radius: 10px; " placeholder="Keyword">
+                    <div class="input-group-append" style="margin-right: 50px; border: 1px solid rgb(154, 187, 184); border-radius: 10px;">
+                        <button class="btn btn-secondary px-2 px-lg-3" style="border: 1px solid rgb(154, 187, 184); border-radius: 10px;">Search</button>
+                    </div>
+                </form>
                 @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
