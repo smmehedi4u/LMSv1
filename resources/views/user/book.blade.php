@@ -17,7 +17,7 @@
                 @foreach($books as $book)
                 <div class="col-lg-4 col-md-4 pb-4">
                     <a class="courses-list-item position-relative d-block overflow-hidden mb-2" href="{{route('detail',$book->id) }}">
-                        <img class="img-fluid" src="{{$book->img}}" alt="">
+                        <img class="img-fluid" src="{{$book->img}}" alt="" style=" width: 200px; height: 300px">
                         <div class="courses-text">
                             <h4 class="text-center text-white px-3">{{$book->name}}</h4>
                             <div class="border-top w-100 mt-3">
