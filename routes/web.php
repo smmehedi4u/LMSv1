@@ -1,14 +1,13 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\LibraryController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\LibraryController;
-use App\Models\Book;
-use App\Models\Library;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,40 +20,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $books = Book::with("author")->paginate(5);
-    //dd($books);
-    return view('user.index',compact("books"));
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/book', function () {
-    $books = Book::with("author")->when(request('q'), function ($query) {
-        return $query->where("name", "like", '%' . request('q') . "%");
-    })->paginate(10);
-    //dd($books);
-    return view('user.book',compact("books"));
-})->name('book');
+Route::get('/book', [HomeController::class, 'book'])->name('book');
+Route::get('/detail/{id}', [HomeController::class, 'detail'])->name('detail');
 
-Route::get('/detail/{id}', function ($id) {
-    $book = Book::with(["author", "category"])->find($id);
-    $libraries = $book->libraries()->get()->toArray();
-    $user = auth()->user();
-
-    usort($libraries, function ($a, $b) use ($user) {
-        // dd($a['latitude']);
-        if (!isset($user)) return 0;
-        $disA = sqrt(pow($a['longitude'] - $user['longitude'], 2) + pow($a['latitude'] - $user['latitude'], 2));
-        $disB = sqrt(pow($b['longitude'] - $user['longitude'], 2) + pow($b['latitude'] - $user['latitude'], 2));
-
-        if ($disA == $disB) return 0;
-        else if ($disA < $disB) return -1;
-        else if ($disA > $disB) return 1;
-    });
-
-    // dd($libraries);
-    return view('user.detail', compact("book", "libraries"));
-})->name("detail");
-// Route::view('/detail', 'user.detail');
 Route::view('/about', 'user.about');
 
 Route::get('/dashboard',[ DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
